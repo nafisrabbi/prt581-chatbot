@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedTrain AI – Doctors Training Chatbot | PRT581</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <div class="logo-icon">🩺</div>
+        <div>
+          <div class="logo-text">MedTrain AI</div>
+          <div class="logo-sub">Doctors Training Platform</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Active Patient</div>
+      <div class="patient-card active">
+        <div class="patient-name">🧑 Robert H., 58</div>
+        <div class="patient-meta">
+          <span class="patient-badge danger">⚠ Concerning lesion</span>
+          <span class="patient-badge">Skin condition</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Patient Details</div>
+      <div class="info-box">
+        <h4>Profile</h4>
+        <div class="info-row"><span>Age</span><span>58 years</span></div>
+        <div class="info-row"><span>Sex</span><span>Male</span></div>
+        <div class="info-row"><span>Occupation</span><span>Outdoor worker</span></div>
+        <div class="info-row"><span>Skin type</span><span>Fitzpatrick II</span></div>
+        <div class="info-row"><span>History</span><span>High UV exposure</span></div>
+      </div>
+      <div class="info-box">
+        <h4>Clinical Hints</h4>
+        <ul class="tips-list">
+          <li>Ask about lesion timeline</li>
+          <li>Inquire about colour change</li>
+          <li>Ask about bleeding or itching</li>
+          <li>Ask about family history</li>
+          <li>Ask about sun exposure</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="progress-section">
+      <div class="sidebar-label">Session Progress</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+      <div class="progress-label">
+        <span id="progressLabel">Gathering history...</span>
+        <span id="msgCount">0 questions</span>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      PRT581 – Assessment 02 (Group Work)<br>
+      Charles Darwin University · Sydney Campus<br>
+      &copy; 2026 Maruf Iqbal, Nafis Rabbi, Pujan Dey, Raihan Rifat
+    </div>
+  </aside>
+
+  <!-- MAIN CHAT -->
+  <main class="main">
+
+    <!-- API KEY BANNER -->
+    <div class="api-banner" id="apiBanner">
+      <span>⚠️ Enter your Anthropic API key for live AI responses:</span>
+      <input type="password" id="apiKeyInput" placeholder="sk-ant-..." />
+      <button onclick="saveApiKey()">Activate</button>
+      <span class="banner-or">or continue in <strong>demo mode</strong></span>
+    </div>
+
+    <!-- HEADER -->
+    <div class="chat-header">
+      <div class="chat-header-left">
+        <div class="patient-avatar">👴</div>
+        <div>
+          <div class="chat-patient-name">Robert H. — Simulated Patient</div>
+          <div class="chat-patient-status">
+            <div class="status-dot"></div>
+            Skin Cancer Diagnostic Session · Active
+          </div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span class="score-badge" id="scoreBadge" style="display:none">🎯 <span id="scoreText">0%</span></span>
+        <button class="btn btn-teal" onclick="showDiagnosisPanel()" id="diagBtn">🔬 Submit Diagnosis</button>
+        <button class="btn btn-danger" onclick="resetSession()">↺ Reset</button>
+      </div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div class="chat-messages" id="chatMessages">
+      <div class="welcome-card">
+        <div class="welcome-tag">🎓 Training Session</div>
+        <h2>Skin Cancer Diagnostic Simulation</h2>
+        <p>You are a junior doctor consulting with Robert H., a 58-year-old male who has noticed a concerning skin lesion. Ask questions to gather a complete clinical history and submit your diagnosis when ready.</p>
+        <div class="welcome-chips">
+          <div class="chip" onclick="sendQuick('Hello Robert, can you tell me what brings you in today?')">👋 Greet patient</div>
+          <div class="chip" onclick="sendQuick('Can you describe the skin lesion you noticed?')">🔍 About the lesion</div>
+          <div class="chip" onclick="sendQuick('How long have you had this lesion?')">📅 Timeline</div>
+          <div class="chip" onclick="sendQuick('Do you have a family history of skin cancer?')">🧬 Family history</div>
+          <div class="chip" onclick="sendQuick('How much sun exposure do you typically get?')">☀️ Sun exposure</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIAGNOSIS PANEL -->
+    <div class="diagnosis-panel" id="diagnosisPanel">
+      <h3>🔬 Submit Your Diagnosis</h3>
+      <div class="diagnosis-options">
+        <button class="diag-option" onclick="selectDiag(this, 'Melanoma')">Melanoma</button>
+        <button class="diag-option" onclick="selectDiag(this, 'Basal Cell Carcinoma (BCC)')">Basal Cell Carcinoma</button>
+        <button class="diag-option" onclick="selectDiag(this, 'Squamous Cell Carcinoma (SCC)')">Squamous Cell Carcinoma</button>
+        <button class="diag-option" onclick="selectDiag(this, 'Actinic Keratosis')">Actinic Keratosis</button>
+        <button class="diag-option" onclick="selectDiag(this, 'Seborrhoeic Keratosis (benign)')">Seborrhoeic Keratosis (benign)</button>
+      </div>
+      <div class="diagnosis-actions">
+        <input type="text" class="diag-input" id="diagCustomInput" placeholder="Or type a custom diagnosis..." />
+        <button class="btn btn-teal" onclick="submitDiagnosis()">Submit →</button>
+        <button class="btn btn-ghost" onclick="hideDiagnosisPanel()">Cancel</button>
+      </div>
+    </div>
+
+    <!-- INPUT AREA -->
+    <div class="chat-input-area">
+      <div class="input-row">
+        <textarea
+          class="chat-input"
+          id="messageInput"
+          placeholder="Ask the patient a question... e.g. 'Where is the lesion located?'"
+          rows="1"
+          onkeydown="handleKey(event)"
+          oninput="autoResize(this)"
+        ></textarea>
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()" title="Send (Enter)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2" fill="white" stroke="white"></polygon>
+          </svg>
+        </button>
+      </div>
+      <div class="input-hint">Press <strong>Enter</strong> to send &middot; <strong>Shift+Enter</strong> for new line</div>
+    </div>
+
+  </main>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
