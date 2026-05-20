@@ -126,8 +126,8 @@ For **live AI-powered responses**:
 
 ## 📸 Screenshots
 
-*(Add screenshots of the running application here for your report Appendix B)*
-
+![User Interface](screenshots/UI.png)
+*Figure 1: User Interface of the Application*
 ---
 
 ## 📚 References
@@ -138,4 +138,3 @@ For **live AI-powered responses**:
 
 ---
 
-*PRT581 Assessment 02 — Submission Deadline: 23 May 2026*
