@@ -17,7 +17,7 @@ The chatbot acts as **Robert H., a 58-year-old male** presenting with a concerni
 ## 🚀 Live Demo
 
 👉 **[https://YOUR-USERNAME.github.io/YOUR-REPO-NAME](https://YOUR-USERNAME.github.io/YOUR-REPO-NAME)**
-👉 **[Demo Website](https://nafisrabbi.github.io/prt581-chatbot)
+👉 **[Demo Website](https://nafisrabbi.github.io/prt581-chatbot)**
 
 > Replace the URL above with your actual GitHub Pages URL after deployment.
 
