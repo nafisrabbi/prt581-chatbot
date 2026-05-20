@@ -126,8 +126,18 @@ For **live AI-powered responses**:
 
 ## 📸 Screenshots
 
-![User Interface](screenshots/UI.png)
+![User Interface](screenshots/01_main_chatbot_interface.png)
 *Figure 1: User Interface of the Application*
+
+![Chat Conversation](screenshots/02_chat_conversation_demo.png)
+*Figure 2: Chat Conversation*
+
+![Diagnosis Feedback](screenshots/03_diagnosis_feedback.png)
+*Figure 3: Diagnosis Feedback*
+
+![Responsive Layout](screenshots/04_mobile_responsive_view.png)
+*Figure 4: Mobile View*
+
 ---
 
 ## 📚 References
